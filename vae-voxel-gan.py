@@ -66,13 +66,13 @@ class DCGAN():
         h = MaxPool3D(pool_size=(4, 4, 4), strides=2, input_shape=(32, 32, 32, 1), padding='same')(img)
         h = Conv3D(200, kernel_initializer='glorot_normal', kernel_size=4, strides=2, padding="same")(h)
         h = PReLU()(h)
-        h = BatchNormalization()(h)
+        # h = BatchNormalization()(h)
         h = GaussianDropout(0.3)(h)
         h = GaussianNoise(0.3)(h)
         h = MaxPool3D(pool_size=(4, 4, 4), strides=2, padding='same')(h)
         h = Conv3D(200, kernel_initializer='glorot_normal', kernel_size=4, strides=2, padding="valid")(h)
         h = PReLU()(h)
-        h = BatchNormalization()(h)
+        # h = BatchNormalization()(h)
         h = Flatten()(h)
         h = GaussianNoise(0.3)(h)
         mu = Dense(self.latent_dim, activation='sigmoid')(h)
@@ -131,7 +131,7 @@ class DCGAN():
                                   kernel_initializer='glorot_normal',
                                   padding='same',
                                   name="7_C"))
-        #model.add(BatchNormalization(name="7_BN"))
+        model.add(BatchNormalization(name="7_BN"))
         model.add(Activation("sigmoid", name="7_A"))
 
 
@@ -146,7 +146,7 @@ class DCGAN():
         model = Sequential()
 
         model.add(Conv3D(64, kernel_initializer='glorot_normal', kernel_size=4, input_shape=(32, 32, 32, 1), padding="same"))
-        #model.add(BatchNormalization())
+        model.add(BatchNormalization())
         model.add(LeakyReLU(alpha=0.4))
         #model.add(MaxPool3D(pool_size=(4, 4, 4), strides=2, padding='same'))
         model.add(SpatialDropout3D(0.2))
