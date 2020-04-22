@@ -118,13 +118,13 @@ class DCGAN():
         model.add(BatchNormalization(name="4_BN"))
         model.add(LeakyReLU(alpha=0.2, name="4_A"))
 
-        # model.add(Conv3D(filters=1, kernel_size=(4, 4, 4),
-        #                  strides=(1, 1, 1),
-        #                  kernel_initializer='glorot_normal',
-        #                  padding='same',
-        #                  name="5_C"))
-        # model.add(BatchNormalization(name="5_BN"))
-        # model.add(LeakyReLU(alpha=0.1, name="5_A"))
+        model.add(Conv3D(filters=1, kernel_size=(4, 4, 4),
+                         strides=(1, 1, 1),
+                         kernel_initializer='glorot_normal',
+                         padding='same',
+                         name="5_C"))
+        model.add(BatchNormalization(name="5_BN"))
+        model.add(LeakyReLU(alpha=0.1, name="5_A"))
 
         model.add(Conv3DTranspose(filters=1, kernel_size=(4, 4, 4),
                                   strides=(1, 1, 1),
